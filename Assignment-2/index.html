@@ -64,7 +64,9 @@
                         </div>
                         <hr/>
                         <label>Product Name :</label>
-                        <input type="text" onChange={ evt => this.setState({ newProductName: evt.target.value })} />
+                        <input type="text" onChange={ evt => this.setState({ newProductName: evt.target.value},()=>{
+                            event.target.value=''
+                        })} />
                         <input type="button" value="Add" onClick={ this.onAddClick} />
                         <ol>
                             {productItems}
