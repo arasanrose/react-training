@@ -23,10 +23,48 @@
     <script src="react.development.js"></script>
     <script src="react-dom.development.js"></script>
     <script src="babel.min.js"></script>
+    <script src="jquery-3.5.1.js"></script>
+    <script>
+        $(function(){
+            $('#btnCalculate').click(function(){
+                var basic = parseInt($('#txtBasic').val()),
+                    hra = parseInt($('#txtHra').val()),
+                    da = parseInt($('#txtDa').val()),
+                    tax = parseInt($('#rangeTax').val());
+
+                var gross = basic + hra + da,
+                    net = gross * ((100-tax)/100);
+
+                $('#tdBasic').text(basic);
+                $('#tdHra').text(hra);
+                $('#tdDa').text(da);
+                $('#tdTax').text(tax);
+                $('#tdSalary').text(net);
+            });
+        });
+    </script>
     <script type="text/babel">
         class SalaryCalculator extends React.Component {
             //state
+            state = {
+                basic:0,
+                hra : 0,
+                da : 0,
+                tax : 0,
+                net :0
+            }
             //behaviour
+            onCalculate = () =>{
+                let gross = this.state.basic + this.state.hra + this.state.da,
+                    net = gross * ((100-this.state.tax)/100);
+                this.setState({net : net});
+                console.log(net)
+            }
+
+            onChange = (evt) => { 
+                this.setState({name : evt.target.value});
+                console.log(this.state);
+            }
             //presentation
             render(){
                 return (
@@ -36,7 +74,7 @@
                     <section>
                         <div className="field">
                             <label htmlFor="">Basic :</label>
-                            <input type="number" name="" id="txtBasic"/>
+                            <input type="number" name="basic" id="txtBasic" onChange={this.onChange}/>
                         </div>
                         <div className="field">
                             <label htmlFor="">HRA :</label>
@@ -51,17 +89,17 @@
                             <input type="range" name="" id="rangeTax" min="0" max="30" />
                         </div>
                         <div className="field">
-                            <input type="button" value="Calculate" id="btnCalculate"/>
+                            <input type="button" value="Calculate" id="btnCalculate" onClick={this.onCalculate}/>
                         </div>
                         <div className="field">
                             <table>
                                 <tbody>
                                     <tr>
-                                        <td id="tdBasic">[basic]</td>
-                                        <td id="tdHra">[hra]</td>
-                                        <td id="tdDa">[da]</td>
-                                        <td id="tdTax">[tax]</td>
-                                        <td id="tdSalary">[salary]</td>
+                                        <td id="tdBasic">{this.state.basic}</td>
+                                        <td id="tdHra">{this.state.hra}</td>
+                                        <td id="tdDa">{this.state.da}</td>
+                                        <td id="tdTax">{this.state.tax}</td>
+                                        <td id="tdSalary">{this.state.net}</td>
                                     </tr>
                                 </tbody>
                             </table>
