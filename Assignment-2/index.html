@@ -28,9 +28,10 @@
                 productNames : [],
                 newProductName : ''
             };
-            onAddClick = () => {
+            onAddClick = (event) => {
                 const newProductNames = [ ...this.state.productNames, this.state.newProductName ];
                 this.setState({ productNames: newProductNames });
+                this.setState({newProductName: ''});
             }
             onRemoveClick = (event,product) => {
                 const productNames= this.state.productNames.filter(item => { if(item !== product['productName']) return item;} )
@@ -64,9 +65,7 @@
                         </div>
                         <hr/>
                         <label>Product Name :</label>
-                        <input type="text" onChange={ evt => this.setState({ newProductName: evt.target.value},()=>{
-                            event.target.value=''
-                        })} />
+                        <input type="text" id="productText" value = {this.state.newProductName} onChange={ evt => this.setState({ newProductName: evt.target.value})} />
                         <input type="button" value="Add" onClick={ this.onAddClick} />
                         <ol>
                             {productItems}
