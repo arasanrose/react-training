@@ -23,26 +23,6 @@
     <script src="react.development.js"></script>
     <script src="react-dom.development.js"></script>
     <script src="babel.min.js"></script>
-    <script src="jquery-3.5.1.js"></script>
-    <script>
-        $(function(){
-            $('#btnCalculate').click(function(){
-                var basic = parseInt($('#txtBasic').val()),
-                    hra = parseInt($('#txtHra').val()),
-                    da = parseInt($('#txtDa').val()),
-                    tax = parseInt($('#rangeTax').val());
-
-                var gross = basic + hra + da,
-                    net = gross * ((100-tax)/100);
-
-                $('#tdBasic').text(basic);
-                $('#tdHra').text(hra);
-                $('#tdDa').text(da);
-                $('#tdTax').text(tax);
-                $('#tdSalary').text(net);
-            });
-        });
-    </script>
     <script type="text/babel">
         class SalaryCalculator extends React.Component {
             //state
