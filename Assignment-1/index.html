@@ -58,12 +58,20 @@
                 let gross = this.state.basic + this.state.hra + this.state.da,
                     net = gross * ((100-this.state.tax)/100);
                 this.setState({net : net});
-                console.log(net)
+                console.log(net);
             }
 
-            onChange = (evt) => { 
-                this.setState({name : evt.target.value});
-                console.log(this.state);
+            onChange = (evt,name) => { 
+                if(name == 'basic')
+                    this.setState({basic : evt.target.value});
+                if(name == 'hra')
+                this.setState({hra : evt.target.value});
+                if(name == 'da')
+                    this.setState({da : evt.target.value});
+                if(name == 'tax')
+                this.setState({tax : evt.target.value});
+
+               // console.log(this.state);
             }
             //presentation
             render(){
@@ -74,19 +82,22 @@
                     <section>
                         <div className="field">
                             <label htmlFor="">Basic :</label>
-                            <input type="number" name="basic" id="txtBasic" onChange={this.onChange}/>
+                            <input type="number" name="basic" id="txtBasic" onChange={event => this.onChange(event,"basic")}/>
                         </div>
                         <div className="field">
                             <label htmlFor="">HRA :</label>
-                            <input type="number" name="" id="txtHra"/>
+                            <input type="number" name="" id="txtHra"
+                            onChange={event => this.onChange(event,"hra")}/>
                         </div>
                         <div className="field">
                             <label htmlFor="">DA :</label>
-                            <input type="number" name="" id="txtDa"/>
+                            <input type="number" name="" id="txtDa"
+                            onChange={event => this.onChange(event,"da")}/>
                         </div>
                         <div className="field">
                             <label htmlFor="">Tax :</label>
-                            <input type="range" name="" id="rangeTax" min="0" max="30" />
+                            <input type="range" name="" id="rangeTax" min="0" max="30" 
+                            onChange={event => this.onChange(event,"tax")}/>
                         </div>
                         <div className="field">
                             <input type="button" value="Calculate" id="btnCalculate" onClick={this.onCalculate}/>
