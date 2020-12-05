@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="react.development.js"></script>
+    <script src="react-dom.development.js"></script>
+    <script src="babel.min.js"></script>
+    <script src="redux.js"></script>
+    <script type="text/babel">
+        const Greeter = ({template}) =>{
+            const [userName, setUserName] = React.useState('');
+            
+            return (
+                <div>
+                    Test
+                </div>
+            );
+        }
+        ReactDOM.render(
+            <Greeter template="Have a nice day"/>,
+            document.getElementById('root')
+        );
+
+    </script>
+</head>
+<body>
+    <div id="root"></div>
+</body>
+</html>

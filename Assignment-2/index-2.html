@@ -59,10 +59,6 @@
                 return(
                     <div>
                         <h3>Products</h3>
-                        <div>
-                            <span>Products Count : </span>
-                            <span> { productCount }</span>
-                        </div>
                         <hr/>
                         <label>Product Name :</label>
                         <input type="text" id="productText" value = {this.state.newProductName} onChange={ evt => this.setState({ newProductName: evt.target.value})} />
@@ -75,7 +71,14 @@
             }
         }
 
-        ReactDOM.render(<Products/>, document.getElementById('root'));
+        ReactDOM.render(
+            <div>
+                <div>
+                    <span>Products Count : </span>
+                    <span> #</span>
+                </div>
+                <Products/>
+            </div>, document.getElementById('root'));
     </script>
 </head>
 <body>
