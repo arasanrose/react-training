@@ -6,9 +6,7 @@ const BugItem = ({ bug, toggle, remove }) => (
     >
       {bug.name}
     </span>
-    <span>
-        Project : {bug.projectId}
-    </span>
+    <span> [project] </span>
     <div className="datetime">{bug.createdAt.toString()}</div>
     <input type="button" value="Remove" onClick={() => remove(bug)} />
   </li>

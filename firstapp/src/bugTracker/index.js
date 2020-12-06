@@ -1,32 +1,36 @@
 import { Fragment } from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+
 import BugStats from './views/bugStats';
 import BugSort from './views/bugSort';
 import BugEdit from './views/bugEdit';
 import BugList from './views/bugList';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
 import * as bugActionCreators from "./actions";
 
-const BugTracker = ({ bugs, projects, toggle, remove, removeClosed, addNew }) => (
+const BugTracker = ({ bugs, toggle, remove, removeClosed, addNew, load }) => (
   <Fragment>
-    <h1>Bug Tracker</h1>
+    <h3>Bug Tracker</h3>
+    <input type="button" value="Load" onClick={load} />
     <hr />
     <BugStats bugs={bugs} />
     <BugSort />
-    <BugEdit projects={projects} addNew={addNew} />
+    <BugEdit addNew={addNew} />
     <BugList {...{ bugs, toggle, remove, removeClosed }} />
   </Fragment>
 );
 
 function mapStateToProps(storeState){
-  const bugs =  storeState.bugState;
-  const projects = storeState.projectState;
-  return { bugs : bugs, projects: projects };
+  const bugs = storeState.bugState;
+  return { bugs : bugs };
 }
+
 function mapDispatchToProps(dispatch){
-  const bugActionDispatchers  = bindActionCreators(bugActionCreators, dispatch);
+  const bugActionDispatchers = bindActionCreators(bugActionCreators, dispatch);
   return bugActionDispatchers;
 }
+
 export default connect(
-  mapStateToProps,
-  mapDispatchToProps)(BugTracker);
+  mapStateToProps, 
+  mapDispatchToProps)
+(BugTracker);

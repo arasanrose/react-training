@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import * as projectActionCreators from "./actions";
+import * as projectActionCreators from './actions';
 
 const Projects = ({ projects, addNew }) => {
   const [newProjectName, setNewProjectName] = useState("");
@@ -27,16 +27,9 @@ const Projects = ({ projects, addNew }) => {
     </div>
   );
 };
-function mapStateToProps(storeState){
-    const projects  = storeState.projectState;
-    return { projects : projects };
-}
-function mapDispatchToProps(dispatch) {
-    const projectActionDispatchers = bindActionCreators(projectActionCreators, dispatch);
-    return projectActionDispatchers;
-}
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps)
-(Projects);
+export default connect (function (storeState){
+  return { projects : storeState.projectState };
+},  function(dispatch){
+  return bindActionCreators(projectActionCreators, dispatch)
+})(Projects);
